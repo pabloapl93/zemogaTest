@@ -47,6 +47,13 @@
 			<artifactId>spring-social-twitter</artifactId>
 			<version>1.1.2.RELEASE</version>
 		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>2.0.2-beta</version>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>

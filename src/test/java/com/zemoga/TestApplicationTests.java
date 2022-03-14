@@ -1,4 +1,4 @@
-package com.zemoga.test;
+package com.zemoga;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
