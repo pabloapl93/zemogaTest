@@ -45,3 +45,7 @@ service to update the information
 		"address":"calle false 123",
 		"phone":"399887766"
 	}
+	
+## time to complete the test
+
+Six Hours
