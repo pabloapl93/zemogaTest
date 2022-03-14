@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8"/>
+    <title>Chat Client</title>
+    <link href="bootstrap.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+        }
+
+        #console {
+            height: 200px;
+            overflow: auto;
+        }
+
+        #userEditing{
+            color: red;
+        }
+
+        .username-msg {
+            color: orange;
+        }
+
+        .connect-msg {
+            color: green;
+        }
+
+        .disconnect-msg {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Test <span id="version"></span></h1>
+<br/>
+
+<div id="divForm">
+    <form class="well form-inline" onsubmit="return false;">
+        <table style="width:50%">
+            <tr>
+                <td style="width: 50%">
+                   <div id="image">
+                   </div>
+                    <div>
+                        <div>
+                            <h3><span id="nameTweet"></span> Timeline</h3>
+                            <h4>Tweets List</h4>
+                            <ul id="tweetList">
+
+                            </ul>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div id="name">
+
+                    </div>
+                    <div id="address">
+
+                    </div>
+                    <div id="email">
+
+                    </div>
+                    <div id="phone">
+
+                    </div>
+                    <div id="experience">
+
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<script src="js/moment-2.24.0.min.js"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
+
+<script>
+    getUser();
+    getTweets();
+    function getUser(){
+        fetch('http://localhost:9191/portfolio/8')
+            .then(response => response.json())
+            .then(json => printInformation(json))
+    }
+
+    function getTweets(){
+        fetch('http://localhost:9191/portfolio/twitter')
+            .then(response => response.json())
+            .then(json => printTweets(json))
+    }
+
+    function printInformation(json){
+        console.log(json)
+        $("#name").html("");
+        $("#name").html("<h1>"+json.name+"</h1>");
+        $("#experience").html("");
+        $("#experience").html("<br/><h2>Experience</h2></br>"+json.experience);
+        $("#image").html("");
+        $("#image").html("<img src='"+json.imagePath+"'>")
+        $("#nameTweet").html("");
+        $("#nameTweet").html(json.name+"'s");
+        nameTweet
+
+        print("address",json.address);
+        print("email",json.email);
+        print("phone",json.phone);
+    }
+    function print(field, value){
+        $("#"+field).html("");
+        $("#"+field).html("</br><h3>"+field+": "+value+"</h3>");
+    }
+    function printTweets(json){
+        console.log(json);
+        let html="";
+        json.forEach((row) =>{
+            html +='<li style="list-style: none;">'+
+                        '<div className="tweet-container">'+
+                            '<img src="'+row.user.profileImageUrl+'" style="display: block; margin-bottom: 10px;"/>'+
+                            '<span>'+row.user.name+'</span>'+
+                            '+<p>'+row.text+'</p>'+
+                        '</div>'+
+                    '</li>';
+        });
+        $("#tweetList").html("");
+        $("#tweetList").html(html);
+    }
+</script>
+</body>
+</html>
